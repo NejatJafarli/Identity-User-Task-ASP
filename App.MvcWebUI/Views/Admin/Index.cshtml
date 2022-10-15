@@ -1,0 +1,54 @@
+﻿@model ProductListViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Product List</h2>
+
+<a class="btn btn-xs btn-success" asp-action="Add" asp-controller="Admin">Add a new Product</a>
+@if (Model.IsAdmin)
+{
+    <a class="btn btn-xs btn-success" asp-action="RegisterEditor" asp-controller="Account">Register new Editor</a>
+    <a class="btn btn-xs btn-success" asp-action="CreateRole" asp-controller="Account">Create New Role</a>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ProductName
+            </th>
+
+            <th>
+                UnitPrice
+            </th>
+            <th>
+                UnitsInStock
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitsInStock)
+                </td>
+                <td>
+                    <a class="btn btn-xs btn-info" asp-action="Update" asp-controller="Admin" asp-route-productId="@item.ProductId">Update</a>
+                    <a class="btn btn-xs btn-danger" asp-action="Delete" asp-controller="Admin" asp-route-productId="@item.ProductId">Delete</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

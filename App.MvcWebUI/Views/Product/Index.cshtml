@@ -1,0 +1,60 @@
+﻿@model ProductListViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               ProductName
+            </th>
+
+            <th>
+                UnitPrice
+            </th>
+            <th>
+                UnitsInStock
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+            
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitsInStock)
+                </td>
+                <td>
+                    <a class="btn btn-xs btn-success" asp-action="AddToCart" asp-controller="Cart"  asp-route-productId="@item.ProductId">Add To Cart</a> 
+                 @*   <a asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<product-list-pager
+current-category="@Model.CurrentCategory"
+current-page="@Model.CurrentPage"
+page-count="@Model.PageCount"
+page-size="@Model.PageSize"
+>
+
+</product-list-pager>

@@ -1,0 +1,5 @@
+﻿@model ShowLoginedUserViewModel
+
+@if (Model.LoginedUserName is not null){
+<div class="alert alert-info animate__animated animate__backInLeft" role="alert">@Model.LoginedUserName</div>
+}
